@@ -3,7 +3,7 @@ import pandas as pd
 import plotly.express as px
 
 # --- PAGE CONFIGURATION ---
-st.set_page_config(page_title="Executive Triad Dashboard", page_icon="🏢", layout="wide")
+st.set_page_config(page_title="Company AFF - Audit Finance Fraud Dashboard", page_icon="🏢", layout="wide")
 
 # --- AUTHENTICATION MODULE ---
 if "authenticated" not in st.session_state:
@@ -12,8 +12,8 @@ if "authenticated" not in st.session_state:
 def render_login():
     col1, col2, col3 = st.columns([1, 2, 1])
     with col2:
-        st.title("🔒 Executive Portal Login")
-        st.caption("Financengineer App — C-Suite Triad System")
+        st.title("🔒 Executive Login")
+        st.caption("Financengineer App — Audit-Finance-Fraud System")
         with st.form("login_form"):
             username = st.text_input("Username")
             password = st.text_input("Password", type="password")
@@ -21,23 +21,23 @@ def render_login():
             
             if submit:
                 # Demo Credentials
-                if username == "demo" and password == "triad2026":
+                if username == "trial" and password == "Trial2026":
                     st.session_state["authenticated"] = True
                     st.rerun()
                 else:
-                    st.error("Invalid credentials. Use demo / triad2026")
+                    st.error("Invalid credentials. Use trial / Trial2026")
 
 if not st.session_state["authenticated"]:
     render_login()
     st.stop()
 
 # --- AUTHENTICATED DASHBOARD CONTENT ---
-st.sidebar.write("👤 Logged in as: **Demo Executive**")
+st.sidebar.write("👤 Logged in as: **Trial**")
 if st.sidebar.button("Log Out"):
     st.session_state["authenticated"] = False
     st.rerun()
 
-st.title("🏢 Executive Triad Dashboard")
+st.title("🏢 Executive Audit-Finance-Fraud Dashboard")
 st.caption("Integrated Financial, Internal Audit, and Fraud Intelligence System")
 
 # Filtering Controls
@@ -67,7 +67,7 @@ st.markdown("---")
 # --- MAIN DASHBOARD GRID (3 VERTICALS) ---
 col_fin, col_audit, col_fraud = st.columns(3)
 
-# 1. FINANCIAL RESULTS (FCCA)
+# 1. FINANCIAL RESULTS
 with col_fin:
     st.header("🟢 Financial Results")
     st.caption("FCCA Lens: Solvency, Profitability & Cash Flow")
