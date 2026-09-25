@@ -3,17 +3,46 @@ import pandas as pd
 import plotly.express as px
 
 # --- PAGE CONFIGURATION ---
-st.set_page_config(page_title="Company AFF - Audit Finance Fraud Dashboard", page_icon="🏢", layout="wide")
+st.set_page_config(page_title="Executive Triad Dashboard", page_icon="🏢", layout="wide")
 
 # --- AUTHENTICATION MODULE ---
 if "authenticated" not in st.session_state:
     st.session_state["authenticated"] = False
 
+# --- LOGOS HEADER (ACCA, CIA/IIA, ACFE/CFE) ---
+def render_logos_header():
+    """Renders logo badges for ACCA, IIA/CIA, and ACFE/CFE professional bodies."""
+    st.markdown(
+        """
+        <div style="display: flex; justify-content: center; align-items: center; gap: 24px; margin-bottom: 20px; flex-wrap: wrap;">
+            <!-- ACCA (FCCA) Logo Badge -->
+            <div style="background: rgba(227, 24, 55, 0.06); border: 1px solid rgba(227, 24, 55, 0.3); border-radius: 10px; padding: 12px 22px; text-align: center; min-width: 170px; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
+                <div style="font-weight: 900; font-size: 22px; color: #E31837; letter-spacing: 1.5px; font-family: sans-serif;">ACCA</div>
+                <div style="font-size: 11px; font-weight: 600; color: #777777; margin-top: 2px;">Financial Results (FCCA)</div>
+            </div>
+            <!-- IIA / CIA Logo Badge -->
+            <div style="background: rgba(0, 90, 156, 0.06); border: 1px solid rgba(0, 90, 156, 0.3); border-radius: 10px; padding: 12px 22px; text-align: center; min-width: 170px; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
+                <div style="font-weight: 900; font-size: 22px; color: #005A9C; letter-spacing: 1.5px; font-family: sans-serif;">IIA / CIA</div>
+                <div style="font-size: 11px; font-weight: 600; color: #777777; margin-top: 2px;">Internal Audit (CIA)</div>
+            </div>
+            <!-- ACFE / CFE Logo Badge -->
+            <div style="background: rgba(0, 135, 90, 0.06); border: 1px solid rgba(0, 135, 90, 0.3); border-radius: 10px; padding: 12px 22px; text-align: center; min-width: 170px; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
+                <div style="font-weight: 900; font-size: 22px; color: #00875A; letter-spacing: 1.5px; font-family: sans-serif;">ACFE / CFE</div>
+                <div style="font-size: 11px; font-weight: 600; color: #777777; margin-top: 2px;">Fraud Stance (CFE)</div>
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
 def render_login():
     col1, col2, col3 = st.columns([1, 2, 1])
     with col2:
-        st.title("🔒 Executive Login")
-        st.caption("Financengineer App — Audit-Finance-Fraud System")
+        # Render Professional Logos on Login Screen
+        render_logos_header()
+        
+        st.title("🔒 Executive Portal Login")
+        st.caption("Financengineer App — C-Suite Triad System")
         with st.form("login_form"):
             username = st.text_input("Username")
             password = st.text_input("Password", type="password")
@@ -25,19 +54,23 @@ def render_login():
                     st.session_state["authenticated"] = True
                     st.rerun()
                 else:
-                    st.error("Invalid credentials. Use trial / Trial2026")
+                    st.error("Invalid credentials. Use demo / triad2026")
 
 if not st.session_state["authenticated"]:
     render_login()
     st.stop()
 
 # --- AUTHENTICATED DASHBOARD CONTENT ---
-st.sidebar.write("👤 Logged in as: **Trial**")
+st.sidebar.write("👤 Logged in as: **Demo Executive**")
 if st.sidebar.button("Log Out"):
     st.session_state["authenticated"] = False
     st.rerun()
 
-st.title("🏢 Executive Audit-Finance-Fraud Dashboard")
+# 1. Render Logos Above Dashboard Title
+render_logos_header()
+
+# 2. Main Dashboard Title
+st.title("🏢 Executive Triad Dashboard")
 st.caption("Integrated Financial, Internal Audit, and Fraud Intelligence System")
 
 # Filtering Controls
@@ -67,7 +100,7 @@ st.markdown("---")
 # --- MAIN DASHBOARD GRID (3 VERTICALS) ---
 col_fin, col_audit, col_fraud = st.columns(3)
 
-# 1. FINANCIAL RESULTS
+# 1. FINANCIAL RESULTS (FCCA)
 with col_fin:
     st.header("🟢 Financial Results")
     st.caption("FCCA Lens: Solvency, Profitability & Cash Flow")
