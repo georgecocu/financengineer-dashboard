@@ -9,26 +9,31 @@ st.set_page_config(page_title="Executive Triad Dashboard", page_icon="🏢", lay
 if "authenticated" not in st.session_state:
     st.session_state["authenticated"] = False
 
-# --- LOGOS HEADER (ACCA, CIA/IIA, ACFE/CFE) ---
+# --- LOGOS HEADER (ACCA, CIA, ACFE) ---
 def render_logos_header():
-    """Renders logo badges for ACCA, IIA/CIA, and ACFE/CFE professional bodies."""
+    """Renders logo badges for ACCA, CIA, and ACFE professional bodies."""
     st.markdown(
         """
-        <div style="display: flex; justify-content: center; align-items: center; gap: 24px; margin-bottom: 20px; flex-wrap: wrap;">
-            <!-- ACCA (FCCA) Logo Badge -->
-            <div style="background: rgba(227, 24, 55, 0.06); border: 1px solid rgba(227, 24, 55, 0.3); border-radius: 10px; padding: 12px 22px; text-align: center; min-width: 170px; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
-                <div style="font-weight: 900; font-size: 22px; color: #E31837; letter-spacing: 1.5px; font-family: sans-serif;">ACCA</div>
-                <div style="font-size: 11px; font-weight: 600; color: #777777; margin-top: 2px;">Financial Results (FCCA)</div>
+        <div style="display: flex; justify-content: center; align-items: center; gap: 24px; margin-bottom: 25px; flex-wrap: wrap;">
+            <!-- ACCA (FCCA) Card -->
+            <div style="background: #ffffff; border: 1px solid #e1e4e8; border-radius: 10px; padding: 14px 20px; text-align: center; width: 200px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/ACCA_logo.svg" style="height: 55px; max-width: 100%; object-fit: contain; margin-bottom: 8px;" alt="ACCA Logo"/>
+                <div style="font-weight: 700; font-size: 15px; color: #111827;">ACCA</div>
+                <div style="font-size: 11px; font-weight: 500; color: #6b7280; margin-top: 2px;">Financial Results (FCCA)</div>
             </div>
-            <!-- IIA / CIA Logo Badge -->
-            <div style="background: rgba(0, 90, 156, 0.06); border: 1px solid rgba(0, 90, 156, 0.3); border-radius: 10px; padding: 12px 22px; text-align: center; min-width: 170px; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
-                <div style="font-weight: 900; font-size: 22px; color: #005A9C; letter-spacing: 1.5px; font-family: sans-serif;">IIA / CIA</div>
-                <div style="font-size: 11px; font-weight: 600; color: #777777; margin-top: 2px;">Internal Audit (CIA)</div>
+            
+            <!-- CIA Card -->
+            <div style="background: #ffffff; border: 1px solid #e1e4e8; border-radius: 10px; padding: 14px 20px; text-align: center; width: 200px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Certified_Internal_Auditor_logo.png/640px-Certified_Internal_Auditor_logo.png" style="height: 55px; max-width: 100%; object-fit: contain; margin-bottom: 8px;" alt="CIA Logo"/>
+                <div style="font-weight: 700; font-size: 15px; color: #111827;">CIA</div>
+                <div style="font-size: 11px; font-weight: 500; color: #6b7280; margin-top: 2px;">Internal Audit (CIA)</div>
             </div>
-            <!-- ACFE / CFE Logo Badge -->
-            <div style="background: rgba(0, 135, 90, 0.06); border: 1px solid rgba(0, 135, 90, 0.3); border-radius: 10px; padding: 12px 22px; text-align: center; min-width: 170px; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
-                <div style="font-weight: 900; font-size: 22px; color: #00875A; letter-spacing: 1.5px; font-family: sans-serif;">ACFE / CFE</div>
-                <div style="font-size: 11px; font-weight: 600; color: #777777; margin-top: 2px;">Fraud Stance (CFE)</div>
+            
+            <!-- ACFE / CFE Card -->
+            <div style="background: #ffffff; border: 1px solid #e1e4e8; border-radius: 10px; padding: 14px 20px; text-align: center; width: 200px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                <img src="https://upload.wikimedia.org/wikipedia/en/0/07/ACFE_logo.jpg" style="height: 55px; max-width: 100%; object-fit: contain; margin-bottom: 8px; border-radius: 4px;" alt="ACFE Logo"/>
+                <div style="font-weight: 700; font-size: 15px; color: #111827;">ACFE</div>
+                <div style="font-size: 11px; font-weight: 500; color: #6b7280; margin-top: 2px;">Fraud Stance (CFE)</div>
             </div>
         </div>
         """,
@@ -38,7 +43,6 @@ def render_logos_header():
 def render_login():
     col1, col2, col3 = st.columns([1, 2, 1])
     with col2:
-        # Render Professional Logos on Login Screen
         render_logos_header()
         
         st.title("🔒 Executive Portal Login")
@@ -49,19 +53,19 @@ def render_login():
             submit = st.form_submit_button("Log In")
             
             if submit:
-                # Demo Credentials
+                # Updated Trial Credentials
                 if username == "trial" and password == "Trial2026":
                     st.session_state["authenticated"] = True
                     st.rerun()
                 else:
-                    st.error("Invalid credentials. Use demo / triad2026")
+                    st.error("Invalid credentials. Use trial / Trial2026")
 
 if not st.session_state["authenticated"]:
     render_login()
     st.stop()
 
 # --- AUTHENTICATED DASHBOARD CONTENT ---
-st.sidebar.write("👤 Logged in as: **Demo Executive**")
+st.sidebar.write("👤 Logged in as: **Trial Executive**")
 if st.sidebar.button("Log Out"):
     st.session_state["authenticated"] = False
     st.rerun()
