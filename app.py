@@ -12,33 +12,24 @@ if "authenticated" not in st.session_state:
 # --- LOGOS HEADER (ACCA, CIA, ACFE) ---
 def render_logos_header():
     """Renders logo badges for ACCA, CIA, and ACFE professional bodies."""
-    st.markdown(
-        """
-        <div style="display: flex; justify-content: center; align-items: center; gap: 24px; margin-bottom: 25px; flex-wrap: wrap;">
-            <!-- ACCA Card -->
-            <div style="background: #ffffff; border: 1px solid #e1e4e8; border-radius: 10px; padding: 14px 20px; text-align: center; width: 200px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); display: flex; flex-direction: column; align-items: center; justify-content: center;">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/ACCA_logo.svg" style="height: 55px; max-width: 100%; object-fit: contain; margin-bottom: 8px;" alt="ACCA Logo"/>
-                <div style="font-weight: 700; font-size: 15px; color: #111827;">ACCA</div>
-                <div style="font-size: 11px; font-weight: 500; color: #6b7280; margin-top: 2px;">Financial Results (FCCA)</div>
-            </div>
-            
-            <!-- CIA Card -->
-            <div style="background: #ffffff; border: 1px solid #e1e4e8; border-radius: 10px; padding: 14px 20px; text-align: center; width: 200px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); display: flex; flex-direction: column; align-items: center; justify-content: center;">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Certified_Internal_Auditor_logo.png/640px-Certified_Internal_Auditor_logo.png" style="height: 55px; max-width: 100%; object-fit: contain; margin-bottom: 8px;" alt="CIA Logo"/>
-                <div style="font-weight: 700; font-size: 15px; color: #111827;">CIA</div>
-                <div style="font-size: 11px; font-weight: 500; color: #6b7280; margin-top: 2px;">Internal Audit (CIA)</div>
-            </div>
-            
-            <!-- ACFE Card -->
-            <div style="background: #ffffff; border: 1px solid #e1e4e8; border-radius: 10px; padding: 14px 20px; text-align: center; width: 200px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); display: flex; flex-direction: column; align-items: center; justify-content: center;">
-                <img src="https://upload.wikimedia.org/wikipedia/en/0/07/ACFE_logo.jpg" style="height: 55px; max-width: 100%; object-fit: contain; margin-bottom: 8px; border-radius: 4px;" alt="ACFE Logo"/>
-                <div style="font-weight: 700; font-size: 15px; color: #111827;">ACFE</div>
-                <div style="font-size: 11px; font-weight: 500; color: #6b7280; margin-top: 2px;">Fraud Stance (CFE)</div>
-            </div>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
+    html_code = """<div style="display:flex; justify-content:center; align-items:center; gap:24px; margin-bottom:25px; flex-wrap:wrap;">
+<div style="background:#ffffff; border:1px solid #e1e4e8; border-radius:10px; padding:14px 20px; text-align:center; width:200px; box-shadow:0 2px 8px rgba(0,0,0,0.05); display:flex; flex-direction:column; align-items:center; justify-content:center;">
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/ACCA_logo.svg/320px-ACCA_logo.svg.png" style="height:45px; max-width:100%; object-fit:contain; margin-bottom:8px;" alt="ACCA Logo"/>
+<div style="font-weight:700; font-size:15px; color:#111827;">ACCA</div>
+<div style="font-size:11px; font-weight:500; color:#6b7280; margin-top:2px;">Financial Results (FCCA)</div>
+</div>
+<div style="background:#ffffff; border:1px solid #e1e4e8; border-radius:10px; padding:14px 20px; text-align:center; width:200px; box-shadow:0 2px 8px rgba(0,0,0,0.05); display:flex; flex-direction:column; align-items:center; justify-content:center;">
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Certified_Internal_Auditor_logo.png/320px-Certified_Internal_Auditor_logo.png" style="height:45px; max-width:100%; object-fit:contain; margin-bottom:8px;" alt="CIA Logo"/>
+<div style="font-weight:700; font-size:15px; color:#111827;">CIA</div>
+<div style="font-size:11px; font-weight:500; color:#6b7280; margin-top:2px;">Internal Audit (CIA)</div>
+</div>
+<div style="background:#ffffff; border:1px solid #e1e4e8; border-radius:10px; padding:14px 20px; text-align:center; width:200px; box-shadow:0 2px 8px rgba(0,0,0,0.05); display:flex; flex-direction:column; align-items:center; justify-content:center;">
+<img src="https://upload.wikimedia.org/wikipedia/en/thumb/0/07/ACFE_logo.jpg/320px-ACFE_logo.jpg" style="height:45px; max-width:100%; object-fit:contain; margin-bottom:8px; border-radius:4px;" alt="ACFE Logo"/>
+<div style="font-weight:700; font-size:15px; color:#111827;">ACFE</div>
+<div style="font-size:11px; font-weight:500; color:#6b7280; margin-top:2px;">Fraud Stance (CFE)</div>
+</div>
+</div>"""
+    st.markdown(html_code, unsafe_allow_html=True)
 
 def render_login():
     col1, col2, col3 = st.columns([1, 2, 1])
@@ -53,7 +44,7 @@ def render_login():
             submit = st.form_submit_button("Log In")
             
             if submit:
-                # Updated Trial Credentials
+                # Trial Credentials
                 if username == "trial" and password == "Trial2026":
                     st.session_state["authenticated"] = True
                     st.rerun()
