@@ -11,24 +11,44 @@ if "authenticated" not in st.session_state:
 
 # --- LOGOS HEADER (ACCA, CIA, ACFE) ---
 def render_logos_header():
-    """Renders logo badges for ACCA, CIA, and ACFE professional bodies."""
-    html_code = """<div style="display:flex; justify-content:center; align-items:center; gap:24px; margin-bottom:25px; flex-wrap:wrap;">
-<div style="background:#ffffff; border:1px solid #e1e4e8; border-radius:10px; padding:14px 20px; text-align:center; width:200px; box-shadow:0 2px 8px rgba(0,0,0,0.05); display:flex; flex-direction:column; align-items:center; justify-content:center;">
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/ACCA_logo.svg/320px-ACCA_logo.svg.png" style="height:45px; max-width:100%; object-fit:contain; margin-bottom:8px;" alt="ACCA Logo"/>
-<div style="font-weight:700; font-size:15px; color:#111827;">ACCA</div>
-<div style="font-size:11px; font-weight:500; color:#6b7280; margin-top:2px;">Financial Results (FCCA)</div>
-</div>
-<div style="background:#ffffff; border:1px solid #e1e4e8; border-radius:10px; padding:14px 20px; text-align:center; width:200px; box-shadow:0 2px 8px rgba(0,0,0,0.05); display:flex; flex-direction:column; align-items:center; justify-content:center;">
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Certified_Internal_Auditor_logo.png/320px-Certified_Internal_Auditor_logo.png" style="height:45px; max-width:100%; object-fit:contain; margin-bottom:8px;" alt="CIA Logo"/>
-<div style="font-weight:700; font-size:15px; color:#111827;">CIA</div>
-<div style="font-size:11px; font-weight:500; color:#6b7280; margin-top:2px;">Internal Audit (CIA)</div>
-</div>
-<div style="background:#ffffff; border:1px solid #e1e4e8; border-radius:10px; padding:14px 20px; text-align:center; width:200px; box-shadow:0 2px 8px rgba(0,0,0,0.05); display:flex; flex-direction:column; align-items:center; justify-content:center;">
-<img src="https://upload.wikimedia.org/wikipedia/en/thumb/0/07/ACFE_logo.jpg/320px-ACFE_logo.jpg" style="height:45px; max-width:100%; object-fit:contain; margin-bottom:8px; border-radius:4px;" alt="ACFE Logo"/>
-<div style="font-weight:700; font-size:15px; color:#111827;">ACFE</div>
-<div style="font-size:11px; font-weight:500; color:#6b7280; margin-top:2px;">Fraud Stance (CFE)</div>
-</div>
-</div>"""
+    """Renders self-contained SVG logo badges for ACCA, CIA, and ACFE professional bodies."""
+    html_code = """
+    <div style="display: flex; justify-content: center; align-items: center; gap: 24px; margin-bottom: 25px; flex-wrap: wrap;">
+        <!-- ACCA Card -->
+        <div style="background: #ffffff; border: 1px solid #e1e4e8; border-radius: 10px; padding: 16px 20px; text-align: center; width: 210px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); display: flex; flex-direction: column; align-items: center; justify-content: center;">
+            <svg width="130" height="42" viewBox="0 0 130 42" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-bottom: 6px;">
+                <rect x="2" y="3" width="36" height="36" rx="6" fill="#D00027"/>
+                <text x="20" y="27" fill="#FFFFFF" font-family="Arial, sans-serif" font-weight="900" font-size="17" text-anchor="middle">A</text>
+                <text x="46" y="29" fill="#111827" font-family="Arial, sans-serif" font-weight="800" font-size="22" letter-spacing="0.5">ACCA</text>
+            </svg>
+            <div style="font-weight: 700; font-size: 14px; color: #111827;">ACCA</div>
+            <div style="font-size: 11px; font-weight: 500; color: #6b7280; margin-top: 2px;">Financial Results (FCCA)</div>
+        </div>
+        
+        <!-- CIA Card -->
+        <div style="background: #ffffff; border: 1px solid #e1e4e8; border-radius: 10px; padding: 16px 20px; text-align: center; width: 210px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); display: flex; flex-direction: column; align-items: center; justify-content: center;">
+            <svg width="130" height="42" viewBox="0 0 130 42" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-bottom: 6px;">
+                <circle cx="20" cy="21" r="17" fill="#0A2540"/>
+                <circle cx="20" cy="21" r="13" stroke="#00D4B2" stroke-width="1.5" stroke-dasharray="3 2"/>
+                <text x="20" y="25" fill="#FFFFFF" font-family="Arial, sans-serif" font-weight="900" font-size="11" text-anchor="middle">CIA</text>
+                <text x="46" y="29" fill="#111827" font-family="Arial, sans-serif" font-weight="800" font-size="22" letter-spacing="0.5">CIA</text>
+            </svg>
+            <div style="font-weight: 700; font-size: 14px; color: #111827;">CIA</div>
+            <div style="font-size: 11px; font-weight: 500; color: #6b7280; margin-top: 2px;">Internal Audit (CIA)</div>
+        </div>
+        
+        <!-- ACFE Card -->
+        <div style="background: #ffffff; border: 1px solid #e1e4e8; border-radius: 10px; padding: 16px 20px; text-align: center; width: 210px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); display: flex; flex-direction: column; align-items: center; justify-content: center;">
+            <svg width="130" height="42" viewBox="0 0 130 42" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-bottom: 6px;">
+                <path d="M20 3L35 9V19C35 28 28.5 35 20 38C11.5 35 5 28 5 19V9L20 3Z" fill="#1E293B"/>
+                <text x="20" y="24" fill="#F59E0B" font-family="Arial, sans-serif" font-weight="900" font-size="10" text-anchor="middle">CFE</text>
+                <text x="46" y="29" fill="#111827" font-family="Arial, sans-serif" font-weight="800" font-size="22" letter-spacing="0.5">ACFE</text>
+            </svg>
+            <div style="font-weight: 700; font-size: 14px; color: #111827;">ACFE</div>
+            <div style="font-size: 11px; font-weight: 500; color: #6b7280; margin-top: 2px;">Fraud Stance (CFE)</div>
+        </div>
+    </div>
+    """
     st.markdown(html_code, unsafe_allow_html=True)
 
 def render_login():
@@ -44,7 +64,7 @@ def render_login():
             submit = st.form_submit_button("Log In")
             
             if submit:
-                # Trial Credentials
+                # Updated Trial Credentials
                 if username == "trial" and password == "Trial2026":
                     st.session_state["authenticated"] = True
                     st.rerun()
