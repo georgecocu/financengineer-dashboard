@@ -1,6 +1,8 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
+import base64
+import os
 
 # --- PAGE CONFIGURATION ---
 st.set_page_config(page_title="Executive Triad Dashboard", page_icon="🏢", layout="wide")
@@ -9,36 +11,42 @@ st.set_page_config(page_title="Executive Triad Dashboard", page_icon="🏢", lay
 if "authenticated" not in st.session_state:
     st.session_state["authenticated"] = False
 
+# --- LOGO ENCODER HELPER ---
+def find_and_encode_logo(candidates):
+    """Searches for uploaded logo files in the repo root and converts to Base64."""
+    for path in candidates:
+        if os.path.exists(path):
+            try:
+                with open(path, "rb") as f:
+                    data = f.read()
+                ext = path.split(".")[-1].lower()
+                mime = "image/svg+xml" if ext == "svg" else f"image/{'jpeg' if ext in ['jpg', 'jpeg'] else ext}"
+                return f"data:{mime};base64,{base64.b64encode(data).decode()}"
+            except Exception:
+                pass
+    return ""
+
 # --- LOGOS HEADER (ACCA, CIA, ACFE) ---
 def render_logos_header():
-    """Renders self-contained SVG logo badges for ACCA, CIA, and ACFE professional bodies."""
+    """Renders local logo badges uploaded to the GitHub repository."""
+    acca_src = find_and_encode_logo(["acca.png", "acca_logo.png", "acca.jpg", "acca.jpeg", "acca.svg", "ACCA.png"])
+    cia_src = find_and_encode_logo(["cia.png", "cia_logo.png", "cia.jpg", "cia.jpeg", "cia.svg", "CIA.png"])
+    acfe_src = find_and_encode_logo(["acfe.png", "acfe_logo.png", "acfe.jpg", "acfe.jpeg", "acfe.svg", "ACFE.png"])
+
     cards_html = (
         '<div style="display: flex; justify-content: center; align-items: center; gap: 20px; margin-bottom: 25px; flex-wrap: wrap;">'
         '<div style="background: #ffffff; border: 1px solid #e1e4e8; border-radius: 10px; padding: 14px 18px; text-align: center; width: 200px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); display: flex; flex-direction: column; align-items: center; justify-content: center;">'
-        '<svg width="120" height="38" viewBox="0 0 130 42" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-bottom: 6px;">'
-        '<rect x="2" y="3" width="36" height="36" rx="6" fill="#D00027"/>'
-        '<text x="20" y="27" fill="#FFFFFF" font-family="Arial, sans-serif" font-weight="900" font-size="17" text-anchor="middle">A</text>'
-        '<text x="46" y="29" fill="#111827" font-family="Arial, sans-serif" font-weight="800" font-size="22" letter-spacing="0.5">ACCA</text>'
-        '</svg>'
+        f'<img src="{acca_src}" style="height: 50px; max-width: 100%; object-fit: contain; margin-bottom: 8px;" alt="ACCA Logo"/>'
         '<div style="font-weight: 700; font-size: 14px; color: #111827;">ACCA</div>'
         '<div style="font-size: 11px; font-weight: 500; color: #6b7280; margin-top: 2px;">Financial Results (FCCA)</div>'
         '</div>'
         '<div style="background: #ffffff; border: 1px solid #e1e4e8; border-radius: 10px; padding: 14px 18px; text-align: center; width: 200px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); display: flex; flex-direction: column; align-items: center; justify-content: center;">'
-        '<svg width="120" height="38" viewBox="0 0 130 42" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-bottom: 6px;">'
-        '<circle cx="20" cy="21" r="17" fill="#0A2540"/>'
-        '<circle cx="20" cy="21" r="13" stroke="#00D4B2" stroke-width="1.5" stroke-dasharray="3 2"/>'
-        '<text x="20" y="25" fill="#FFFFFF" font-family="Arial, sans-serif" font-weight="900" font-size="11" text-anchor="middle">CIA</text>'
-        '<text x="46" y="29" fill="#111827" font-family="Arial, sans-serif" font-weight="800" font-size="22" letter-spacing="0.5">CIA</text>'
-        '</svg>'
+        f'<img src="{cia_src}" style="height: 50px; max-width: 100%; object-fit: contain; margin-bottom: 8px;" alt="CIA Logo"/>'
         '<div style="font-weight: 700; font-size: 14px; color: #111827;">CIA</div>'
         '<div style="font-size: 11px; font-weight: 500; color: #6b7280; margin-top: 2px;">Internal Audit (CIA)</div>'
         '</div>'
         '<div style="background: #ffffff; border: 1px solid #e1e4e8; border-radius: 10px; padding: 14px 18px; text-align: center; width: 200px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); display: flex; flex-direction: column; align-items: center; justify-content: center;">'
-        '<svg width="120" height="38" viewBox="0 0 130 42" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-bottom: 6px;">'
-        '<path d="M20 3L35 9V19C35 28 28.5 35 20 38C11.5 35 5 28 5 19V9L20 3Z" fill="#1E293B"/>'
-        '<text x="20" y="24" fill="#F59E0B" font-family="Arial, sans-serif" font-weight="900" font-size="10" text-anchor="middle">CFE</text>'
-        '<text x="46" y="29" fill="#111827" font-family="Arial, sans-serif" font-weight="800" font-size="22" letter-spacing="0.5">ACFE</text>'
-        '</svg>'
+        f'<img src="{acfe_src}" style="height: 50px; max-width: 100%; object-fit: contain; margin-bottom: 8px;" alt="ACFE Logo"/>'
         '<div style="font-weight: 700; font-size: 14px; color: #111827;">ACFE</div>'
         '<div style="font-size: 11px; font-weight: 500; color: #6b7280; margin-top: 2px;">Fraud Stance (CFE)</div>'
         '</div>'
