@@ -15,7 +15,7 @@ def render_logos_header():
     st.markdown(
         """
         <div style="display: flex; justify-content: center; align-items: center; gap: 24px; margin-bottom: 25px; flex-wrap: wrap;">
-            <!-- ACCA (FCCA) Card -->
+            <!-- ACCA Card -->
             <div style="background: #ffffff; border: 1px solid #e1e4e8; border-radius: 10px; padding: 14px 20px; text-align: center; width: 200px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); display: flex; flex-direction: column; align-items: center; justify-content: center;">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/ACCA_logo.svg" style="height: 55px; max-width: 100%; object-fit: contain; margin-bottom: 8px;" alt="ACCA Logo"/>
                 <div style="font-weight: 700; font-size: 15px; color: #111827;">ACCA</div>
@@ -29,7 +29,7 @@ def render_logos_header():
                 <div style="font-size: 11px; font-weight: 500; color: #6b7280; margin-top: 2px;">Internal Audit (CIA)</div>
             </div>
             
-            <!-- ACFE / CFE Card -->
+            <!-- ACFE Card -->
             <div style="background: #ffffff; border: 1px solid #e1e4e8; border-radius: 10px; padding: 14px 20px; text-align: center; width: 200px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); display: flex; flex-direction: column; align-items: center; justify-content: center;">
                 <img src="https://upload.wikimedia.org/wikipedia/en/0/07/ACFE_logo.jpg" style="height: 55px; max-width: 100%; object-fit: contain; margin-bottom: 8px; border-radius: 4px;" alt="ACFE Logo"/>
                 <div style="font-weight: 700; font-size: 15px; color: #111827;">ACFE</div>
@@ -104,7 +104,7 @@ st.markdown("---")
 # --- MAIN DASHBOARD GRID (3 VERTICALS) ---
 col_fin, col_audit, col_fraud = st.columns(3)
 
-# 1. FINANCIAL RESULTS (FCCA)
+# 1. FINANCIAL RESULTS
 with col_fin:
     st.header("🟢 Financial Results")
     st.caption("FCCA Lens: Solvency, Profitability & Cash Flow")
@@ -130,7 +130,7 @@ with col_fin:
         st.write("**Debt-to-Equity:** 0.45")
         st.write("**Bad Debt Provision:** 2.1% of AR")
 
-# 2. INTERNAL AUDIT HEALTH (CIA)
+# 2. INTERNAL AUDIT HEALTH
 with col_audit:
     st.header("🔵 Internal Audit Health")
     st.caption("CIA Lens: Risk Governance & Control Status")
@@ -160,7 +160,7 @@ with col_audit:
         st.error("**Overdue Critical:** 2 Issues")
         st.write("**Repeat Issue Index:** 0.0%")
 
-# 3. FRAUD STANCE (CFE)
+# 3. FRAUD STANCE
 with col_fraud:
     st.header("🔴 Fraud Stance & Integrity")
     st.caption("CFE Lens: Anomaly Detection & Prevention")
@@ -183,8 +183,8 @@ with col_fraud:
 
 st.markdown("---")
 
-# TRIAD ALERT ENGINE
-st.subheader("🚨 Triad Alert Engine")
+# ALERT ENGINE
+st.subheader("🚨 Alert Engine")
 with st.expander("⚠️ **CRITICAL CROSS-DOMAIN ALERT DETECTED**", expanded=True):
     st.error("""
     **Correlation Identified:**
